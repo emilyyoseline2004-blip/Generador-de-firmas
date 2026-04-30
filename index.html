@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Generador de Firmas - El Economista</title>
+
+<style>
+body{
+    font-family: Arial;
+    background:#f4f4f4;
+    padding:30px;
+}
+.container{
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    max-width:700px;
+    margin:auto;
+    box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+input, button{
+    width:100%;
+    padding:10px;
+    margin:10px 0;
+}
+textarea{
+    width:100%;
+    height:300px;
+}
+button{
+    background:#006595;
+    color:white;
+    border:none;
+    cursor:pointer;
+}
+button:hover{
+    background:#008fc5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h2>Generador de Firmas Corporativas</h2>
+
+    <label>Correo:</label>
+    <input type="email" id="correo" placeholder="usuario@eleconomista.mx">
+
+    <label>Extensión (opcional):</label>
+    <input type="text" id="extension" placeholder="Ej: 1234">
+
+    <label>Teléfono móvil (opcional):</label>
+    <input type="text" id="movil" placeholder="Ej: 55-1234-5678">
+
+    <label>Número de imagen:</label>
+    <input type="text" id="imagen" placeholder="Ej: 2589">
+
+    <button onclick="generarFirma()">Generar Firma</button>
+    <button onclick="copiarFirma()">Copiar Firma</button>
+
+    <h3>HTML generado:</h3>
+    <textarea id="resultado"></textarea>
+</div>
+
+<script>
+function generarFirma(){
+
+    let correo = document.getElementById("correo").value;
+    let extension = document.getElementById("extension").value;
+    let imagen = document.getElementById("imagen").value;
+    let movil = document.getElementById("movil").value;
+
+    let extTexto = extension ? "Ext. " + extension : "";
+    let movilTexto = movil ? "<br><span style='color:#006595;padding-left:30px;'>Móvil " + movil + "</span>" : "";
+
+    let html = `
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>El Economista</title>
+<style>
+body{margin:0px;}
+p{font-family:Century Gothic;font-size:14px;line-height:1.5;}
+#contenedor{width:100%;max-width:1024px;margin-left:auto;margin-right:auto;}
+</style>
+</head>
+
+<body>
+<div id="contenedor">
+<table width="80%" border="0" cellspacing="2px" cellpadding="1">
+
+<tr>
+<td colspan="5" style="padding:10px 0px 0px 30px;">
+<a href="https://www.eleconomista.com.mx/" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/logo.png" width="410px" style="max-width:250px;min-width:240px;">
+</a>
+</td>
+</tr>
+
+<tr>
+<td colspan="5" style="padding:10px 0px 0px 30px;">
+<img src="https://media.eleconomista.com.mx/contenido/img/${imagen}.png" width="343px" style="max-width:343px;min-width:343px;">
+</td>
+</tr>
+
+<tr>
+<td colspan="5">
+<img src="https://media.eleconomista.com.mx/contenido/img/line.png" width="100%" style="max-width:410px;min-width:260px;">
+</td>
+</tr>
+
+<tr>
+<td colspan="5">
+<p>
+<span style="color:#006595;padding-left:30px;">${correo}</span><br>
+
+<span style="color:#006595;padding-left:30px;">Conmutador 55-5326-5454 ${extTexto}</span>
+${movilTexto}
+
+<br>
+<span style="color:#000000;padding-left:30px;">Av. San Jerónimo 458, Col. Jardines del Pedregal,</span><br>
+<span style="color:#000000;padding-left:30px;">C.P. 01900, México CDMX</span>
+</p>
+</td>
+</tr>
+
+<tr>
+<td colspan="5">
+<a href="https://www.facebook.com/ElEconomista.mx" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/facebook.png" width="25px" style="padding-left:30px; padding-right:5px; padding-top:5px; padding-bottom:5px;">
+</a>
+
+<a href="https://twitter.com/eleconomista" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/twitter.png" width="25px" style="padding:5px;">
+</a>
+
+<a href="https://www.youtube.com/user/VideoElEconomista" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/youtube.png" width="25px" style="padding:5px;">
+</a>
+
+<a href="https://www.linkedin.com/company/el-economista/" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/linkedin.png" width="25px" style="padding:5px;">
+</a>
+
+<a href="https://www.pinterest.com.mx/eleconomista/?eq=el%20eco&etslf=7513" target="_blank">
+<img src="https://media.eleconomista.com.mx/contenido/img/pinterest.png" width="25px" style="padding:5px;">
+</a>
+</td>
+</tr>
+
+<tr>
+<td colspan="5" style="font-family:Century Gothic;font-size:12px;text-align:justify;color:#9b9c9d;padding-top:5px;padding-left:30px;padding-right:30px;">
+Este correo electrónico, incluyendo en su caso, los archivos adjuntos al mismo, pueden contener información de carácter confidencial y/o privilegiada, y se envían a la atención única y exclusivamente de la persona y/o entidad a quien va dirigido. La copia, revisión, uso, revelación y/o distribución de dicha información confidencial sin la autorización por escrito del periódico El Economista S.A. De C.V. Está prohibida. Si usted ha recibido este correo electrónico por error, favor de destruirlo incluyendo sus archivos adjuntos, así como cualquier copia del mismo y notificarle al remitente a la dirección electrónica indicada. Mediante la recepción del presente correo usted reconoce y acepta que en caso de incumplimiento de su parte y/o de sus representantes a los términos antes mencionados, el Periódico El Economista S.A. De C.V. Tendrá derecho a los daños y perjuicios que esto le cause. En El Economista cuidamos el ambiente, por tal motivo antes de imprimir este correo electrónico, piense bien si es necesario hacerlo: El medio ambiente es cuestión de todos.
+</td>
+</tr>
+
+</table>
+</div>
+</body>
+</html>
+`;
+
+    document.getElementById("resultado").value = html;
+}
+
+function copiarFirma(){
+    let textarea = document.getElementById("resultado");
+    textarea.select();
+    document.execCommand("copy");
+    alert("Firma copiada ✅");
+}
+</script>
+
+</body>
+</html>
